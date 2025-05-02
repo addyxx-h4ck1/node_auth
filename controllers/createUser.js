@@ -1,0 +1,24 @@
+const Prisma = require('../libs/prisma');
+
+const handleNewUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const new_user = await Prisma.user.create({
+      data: {
+        email: email,
+        name: name,
+        password: password,
+      },
+    });
+
+    res.status(201).json({ ok: true, msg: 'User created' });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ ok: false, msg: error?.message || 'Internal server error' });
+  }
+};
+
+module.exports = handleNewUser;
