@@ -1,6 +1,8 @@
 const express = require('express');
 const routes = require('./routes/route');
 const requestsLogger = require('./middleware/requestLogger');
+const { config } = require('dotenv');
+config();
 
 const app = express();
 app.use(requestsLogger);
