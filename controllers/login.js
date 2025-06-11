@@ -29,6 +29,11 @@ const handleLogin = async (req, res) => {
 
     const token = await generateToken(user.id);
 
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24,
+    });
+
     res.status(201).json({ ok: true, token });
   } catch (error) {
     console.log(error);
